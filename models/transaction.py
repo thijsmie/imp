@@ -12,6 +12,8 @@ transactionrights = db.Table('transactionrights',
 
 class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    trackid = db.Column(db.String(80))
+    
     eventname = db.Column(db.String(100))
     eventdate = db.Column(db.Date)
     contact = db.Column(db.String(100))
