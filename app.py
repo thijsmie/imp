@@ -9,4 +9,5 @@ models.db.init_app(app)
 app.register_blueprint(routers.ProductRouter, url_prefix="/product")
 app.register_blueprint(routers.StockRouter, url_prefix="/stock")
 
-app.run();
+if __name__ == "__main__":
+    app.run();
