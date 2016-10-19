@@ -1,2 +1,0 @@
-# imp
-Inventory Management Program

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ImpMicro Stock Bookkeeping">
+    <title>ImpMicro</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="css/layouts/uiblock.css">
+    <link rel="stylesheet" href="css/auto-complete.css">
+</head>
+<body>
+
+<div class="pure-g">
+<div class="sidebar pure-u-1-5">
+Menu
+</div>
+<div class="content pure-u-4-5">
+<form class="pure-form pure-form-stacked pure-u-1">
+    <fieldset>
+        <legend>
+            <div class="pure-g">
+                <div class="pure-u-2-5">
+                    Product
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    Amount
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    Value
+                </div>
+
+                <div class="pure-u-1-5">
+                    Mods
+                </div>
+            </div>
+        </legend>
+        <div class="pure-g">
+                <div class="pure-u-2-5">
+                    Coca Cola Regular (Fles 1.5l)
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    12
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    36.90
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    BTW21%
+                </div>
+            </div>
+            <div class="pure-g">
+                <div class="pure-u-2-5">
+                    Warsteiner krat
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    60
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    645.89
+                </div>
+
+                <div class="pure-u-1-5 num-input">
+                    BTW21%
+                </div>
+            </div>
+    
+    <fieldset>
+        <legend>New row</legend>
+        <div class="pure-g">
+            <div class="pure-u-2-5">
+                <label for="product">Product</label>
+                <input id="product" class="pure-u-1" type="text">
+            </div>
+
+            <div class="pure-u-1-5">
+                <label for="amount">Amount</label>
+                <input id="amount" class="pure-u-1 num-input" type="text">
+            </div>
+
+            <div class="pure-u-1-5">
+                <label for="value">Value</label>
+                <input id="value" class="pure-u-1 num-input" type="text">
+            </div>
+
+            <div class="pure-u-1-5">
+                <label for="mods">Mods</label>
+                <input id="mods" class="pure-u-1 num-input" type="text" readonly>
+            </div>
+        </div>
+
+        <button type="submit" class="pure-button pure-button-primary">Add</button>
+    </fieldset>
+</form>
+</div></div>
+</body>
+<script src="js/auto-complete.min.js"></script>
+    <script>
+        var demo1 = new autoComplete({
+            selector: '#product',
+            minChars: 1,
+            source: function(term, suggest){
+                term = term.toLowerCase();
+                var choices = ['AH Aardappelsalade','AH Afwasmiddel','AH Allesreiniger','AH Bekers wit 200 ml','AH bezorgkosten','AH Borden Wit','AH Borden wit','AH Brood','AH Bruine bolletjes','AH Cocktail Noten','AH Curry statube','AH Glasreiniger','AH Huzarensalade','AH Kaas','AH Ketchup','AH Knakworst','AH Koffiefilterhouder','AH Komkommer','AH Mayonaise statube','AH Mayonaise statube','AH Mayonaise statube','AH Messen wit','AH Perla aroma snelfiltermaling','AH Pittige Knoflooksaus','AH Schouderham','AH Schuursponsjes (pak 6st)','AH Servetten 1-laags','AH Viscosedoekje','AH Viscosedoekje','AH Vorken wit','AH Witte bollen','Alex Meijer Koffie (Blik 5kg)','Alex Meijer Koffie Roodmerk 2.5kg','Alfa Edel Pils (fles 30cl)','Appelsap (pak 1L)','Balisto Muesli (groen)','Bavaria Pils','Bernkasteler Kurfustlay Spatlese','Bodegas Caracter Merlot (rood)','Bouchard Aine Fils Bourgogne Chardonnay','Bounty Melk','Bouquet Wijnglas','Brand Pilsener (fles 30cl)','Brandpasta-EcoFlame','Bugs Tribolo','Chupa Chups','Blik CoCa Cola Cherry (33cl)','Blik CoCa Cola Light (33cl)','CoCa Cola Light (Fles 1.5L)','Blik CoCa Cola Regular (33cl)','CoCa Cola Regular (Fles 1.5L)','De Molen Speculaaspop','Dommelsch Pilsner (Fles 30cl)','Driehoek Vloeibare zeep glycerine','Duvel met Glas','Duvel Noorgat','Duyvis Krabbelnoten provencale','E: AH klapkrat','E: Beugelfles (45cl) E 0.15','E: CBL fust','E: CBL krat zwart','E: Fles 30cl E 0.10','E: Krat 12 vaks (spa) E 2.00','E: Krat 12 vaks (vrumona) E 2.00','E: Krat 16 vaks E 1.50','E: Krat 24 vaks E 1.50','E: PET fles E 0.25','E: Rolcontainer','E: Tussenschot Rolcontainer','E: Smallbag Coca Cola','Euro Shopper Kruidenboter','Euroshopper Energydrink (blik 25cl)','Blik Fanta Cassis (33cl)','Blik Fanta Icy Lemon (33cl)','Blik Fanta Orange Regular (33cl)','Fanta Orange Regular (Fles 1.5L)','Felicia Multireiniger','Freedent prof. White','Grimbergen Dubbel','Grolsch Beugelfles (fles 45cl)','Grolsch Pilsner (33cl)','Gulpener Pilsener','HELA Curry','Hero Cassis (fles 1.25L)','Hertog Jan Pilsener (fles 30cl)','Hoegaarden Witbier (flesje 30cl)','Jos. Vin de Pays Chardonnay-Terret Blanc','Kelle-Vue Kriek','Kinder Bueno','KitKat','KitKat Chunky','Kleine Zalze Cellar Selection Chardonnay','La Chouffe','Lays Bolgnese','Lays Naturel','Lays Paprika','Lays superchips naturel','Lays superchips paprika','Leffe Tripel (fles 30cl)','Lion','Lipton Ice-Tea (fles 1.5L)','Lipton Ice-Tea Lemon (pak 1.5L)','Longdrink glas (27 cl)','Lu Tuc Crackers Naturel','Maltersers','Markant Vaatwastablet All-in-One','Mars','Milky Way Crispy Rolls','Minute Maid Orange (blik 33cl)','MM Choco','MM Pinda (geel)','Blik Nestea Sparkling Lemon (33cl)','Pringles - Hot and Spicy','Pringles - Paprika','Pringles- Original','Rio Fiesta Mix (zak 1kg)','Rondetten Spoeltabletten','Santa Alicia Rose','Santa Ana Malbec-Merlot Caracter','Sinasappelsap (pak 1L)','Siro Party Mix (300gr)','Slammers Energy Drink (blik 25cl)','Snickers','Spa Barisart Rood (Fles 1.5L)','Speciaalbiercombo','Speculaaspop','Blik Sprite Regular (33cl)','Sprite Regular (Fles 1.5L)','ST Bernardus Tripel','ST. Bernardus ABT 12','Stapelglas (28cl)','SUMA CoffeeClean (fles 2L)','SUMA ontkalkingsmiddel','SUMA TAB D4 Desinfectietablet','Take Dis Polyzak','Topking Vlammensaus','Twix','Unox Bifi Original XXL','Unox Cup-A-Soup Champignon Creme','Unox Cup-A-Soup Kip','Unox Cup-A-Soup Tomaat','Unox Good Noodles Groente','Unox Good Noodles Kip','Vina Bajoz Rose','Warsteiner Premium Pilsner','Wasa Sandwich Tomaat/Basilicum Single','Wieckse Rose','Wieckse Witte (flesje 30cl)','Wieger Ketellapper Snelle Jelle Kruidkoek','Yum Yum Beef flavour','Yum Yum Chicken flavour','Yum Yum Vegetable flavour','AH Basic Achterham','Heinz Tomatenketchup','AH Mozzarella','AH Tomaten','Grand Italia Pesto alla Genovese','Santa Ana Cabernet Sauvignon','Yum Yum Duck flavour'];
+                var suggestions = [];
+                for (i=0;i<choices.length;i++)
+                    if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            }
+        });
+    </script>
+</html>
