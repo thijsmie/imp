@@ -9,8 +9,8 @@ def many_to_many(name, fromtable, totable):
     lfromtable = fromtable.lower()
     ltotable = totable.lower()
     table = db.Table(name,
-        db.Column(ltotable + '_id', db.Integer, db.ForeignKey(lltotable + '.id')),
-        db.Column(lfromtalbe + '_id', db.Integer, db.ForeignKey(fromtable + '.id'))
+        db.Column(ltotable + '_id', db.Integer, db.ForeignKey(totable + '.id')),
+        db.Column(lfromtable + '_id', db.Integer, db.ForeignKey(fromtable + '.id'))
     )
     
     return db.relationship(totable, secondary=table,
@@ -28,4 +28,15 @@ class Base(db.Model):
         
     def __repr__(self):
         return '<'+self.__class__.__name__+': {}>'.format(self.id)
+
+
+@app.before_first_request
+def first_time_setup():
+    import models
+    db.create_all()
+
+import api
+
+if __name__ == "__main__":
+    app.run()
 

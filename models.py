@@ -1,4 +1,4 @@
-from .application import db, many_to_many, Base
+from application import db, many_to_many, Base
 
 sign = lambda x: math.copysign(1, x)
 
@@ -29,7 +29,7 @@ class Product(Base):
     def __init__(self):
         pass
         
-    def lose(self, amount):
+    def lose(self, amount, value=None):
         if amount <= 0:
             raise IllegalProductAdaption("Incorrect call of function 'lose', amount cannot be zero/negative.")
             
@@ -38,6 +38,10 @@ class Product(Base):
             
         if self.value_constant:
             dvalue = amount * self.value
+        elif value != None:
+            if value > self.value:
+                raise IllegalProductAdaption(str(self) + "would have negative value.")
+            dvalue = value
         else:
             dvalue = round(amount / self.amount * self.value)
         
@@ -68,7 +72,7 @@ class Product(Base):
         
     def change_amount(self, damount):
         if sign(self.amount + damount) != sign(self.amount) or self.amount + damount == 0:
-            if not (self.allow_negative && self.value_constant):
+            if not (self.allow_negative and self.value_constant):
                 raise IllegalRowAdaption("The value of " + str(self) + " would change sign.")
         self.amount += damount
         return self.amount
@@ -96,13 +100,13 @@ class Transaction(Base):
         else:
             self.eventnumber = previous.eventnumber + 1
         
-    def lose(self, product, amount):
+    def lose(self, product, amount, value=None):
         for row in rows:
             if row.product == product:
-                value = row.lose(amount)
+                value = row.lose(amount, value)
                 break
-        finally:       
-            value = TransactionRow(self, product).lose(amount)
+        else:       
+            value = TransactionRow(self, product).lose(amount, value)
         
         return value
         
@@ -111,7 +115,7 @@ class Transaction(Base):
             if row.product == product:
                 value = row.gain(amount, value)
                 break
-        finally:      
+        else:      
             value = TransactionRow(self, product).gain(amount, value)
         
         return value            
@@ -125,7 +129,7 @@ class TransactionRow(Base):
     transaction_id = db.Column(db.ForeignKey('transaction.id'))
     
     product = db.relationship('Product', lazy='joined')
-    product_id = db.Column(db.ForeignKey('product.id')  
+    product_id = db.Column(db.ForeignKey('product.id'))
     
     amount = db.Column(db.Integer)
     value = db.Column(db.Integer)
@@ -138,8 +142,8 @@ class TransactionRow(Base):
         self.value = 0
         self.amount = 0
     
-    def lose(self, amount): # selling more, buying less
-        dvalue = product.lose(amount)
+    def lose(self, amount, value=None): # selling more, buying less
+        dvalue = product.lose(amount, value)
         self.value -= dvalue
         self.amount -= amount
         return dvalue

@@ -3,6 +3,7 @@ from jsonschema import validate
 NewTransactionRowSchema = {
     "type": "object",
     "properties": {
+        "type": {"type": "string", "enum": ["gain", "lose"]},
         "product": {"type": "integer"},
         "amount":  {"type": "integer"},
         "value":   {"type": "integer"},
@@ -11,8 +12,11 @@ NewTransactionRowSchema = {
             "items": {"type": "integer"}
             }
     },
-    "required": ["product", "amount"]
+    "required": ["product", "amount", "type"]
 }
+
+def NewTransactionRowValidator(data):
+    return validate(data, NewTransactionRowSchema)
 
 EditTransactionRowSchema = {
     "type": "object",
@@ -29,6 +33,9 @@ EditTransactionRowSchema = {
     "required": ["index"]
 }
 
+def EditTransactionRowValidator(data):
+    return validate(data, EditTransactionRowSchema)
+
 NewTransactionSchema = {
     "type": "object",
     "properties": {
@@ -39,11 +46,14 @@ NewTransactionSchema = {
         "rows": {
             "type": "array",
             "minItems": 1,
-            "items": TransactionRowSchema
+            "items": NewTransactionRowSchema
         }
     },
     "required": ["eventname", "eventdate", "eventcontact", "rows"]
 }
+
+def NewTransactionValidator(data):
+    return validate(data, NewTransactionSchema)
 
 EditTransactionSchema = {
     "type": "object",
@@ -56,11 +66,14 @@ EditTransactionSchema = {
         "rows": {
             "type": "array",
             "minItems": 1,
-            "items": TransactionRowSchema
+            "items": NewTransactionRowSchema
         }
     },
     "required": ["index"]
 }
+
+def EditTransactionValidator(data):
+    return validate(data, EditTransactionSchema)
 
 NewModSchema = {
     "type": "object",
