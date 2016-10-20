@@ -2,12 +2,14 @@ from application import app, db
 from models import Product, Transaction
 from validation import NewTransactionValidator, EditTransactionValidator
 from response import fail, success
+from security import protected, Access
 from helpers import add_transaction_row, transaction_as_dict
 
 from dateutil import parser
 
 
-@app.route('/transaction', methods=['POST'])
+@app.route('/transactions', methods=['POST'])
+@protected
 def create_transaction():
     data = request.json
     try:
@@ -33,7 +35,8 @@ def create_transaction():
     return success(transaction_as_dict(transaction))
     
     
-@app.route('/transaction', methods=['PUT'])
+@app.route('/transactions', methods=['PUT'])
+@protected
 def update_transaction():
     data = request.json
     try:
@@ -73,7 +76,8 @@ def update_transaction():
     db.session.commit()
     return success()
     
-@app.route('/transaction/{id}', methods=["GET"])
+@app.route('/transactions/{id}', methods=["GET"])
+@protected(level=Access.LoggedIn)
 def get_transaction(id):
     transaction = Transaction.query.get(data['index'])
     
@@ -83,15 +87,18 @@ def get_transaction(id):
     return succes(transaction_as_dict(transaction))
     
     
-@app.route('/product', methods=["POST"])
+@app.route('/products', methods=["POST"])
+@protected
 def create_product():
     pass
     
-@app.route('/product', methods=["PUT"])
-def update_product():
+@app.route('/products/{id}', methods=["PUT"])
+@protected
+def update_product(id):
     pass
     
-@app.route('/product/{id}', methods=["GET"])
+@app.route('/products/{id}', methods=["GET"])
+@protected
 def get_product(id):
     pass
     

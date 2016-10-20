@@ -234,6 +234,13 @@ class Relation(Base):
         self.send_transaction_updates = True
         self.send_budget_warnings = True
     
+class User(Base):
+    username = db.Column(db.String(80))
+    passhash = db.Column(db.String(256))
+    admin = db.Column(db.Boolean)
+    
+    relation_id = db.Column('relation.id')
+    relation = db.relationship('Relation', lazy='dynamic')
     
     
     

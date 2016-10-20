@@ -126,3 +126,16 @@ EditRelationSchema = {
     },
     "required": ["index"]
 }
+
+
+LoginScheme = {
+    "type": "object",
+    "properties": {
+        "username": {"type": "string"},
+        "password": {"type": "string"}
+    },
+    "required": ["username", "password"]
+}
+
+def LoginValidator(data):
+    return validate(data, LoginSchema)
