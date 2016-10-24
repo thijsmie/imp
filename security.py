@@ -13,7 +13,7 @@ def verify_login(username, password):
         return None
     if check_password_hash(user.passhash, password):
         return user
-    else
+    else:
         return None                      
                           
 def generate_auth_token(user, expiration = 6000):

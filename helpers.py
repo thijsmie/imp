@@ -2,6 +2,32 @@ from application import db
 from models import Product, Transaction
 
 
+def many_to_many(name, fromtable, totable):
+    lfromtable = fromtable.lower()
+    ltotable = totable.lower()
+    table = db.Table(name,
+        db.Column(ltotable + '_id', db.Integer, db.ForeignKey(totable + '.id')),
+        db.Column(lfromtable + '_id', db.Integer, db.ForeignKey(fromtable + '.id'))
+    )
+    
+    return db.relationship(totable, secondary=table,
+        backref=db.backref(lfromtable+'s', lazy='dynamic'))
+    
+class Base(db.Model):
+    __abstract__  = True
+
+    id            = db.Column(db.Integer, primary_key=True)
+    date_created  = db.Column(db.DateTime,  default=db.func.current_timestamp())
+    date_modified = db.Column(
+        db.DateTime,  
+        default=db.func.current_timestamp(),
+        onupdate=db.func.current_timestamp())
+        
+    def __repr__(self):
+        return '<'+self.__class__.__name__+': {}>'.format(self.id)
+
+
+
 def add_transaction_row(transaction, row):
     product = Product.query.filter_by(id=row['product']).first()
 

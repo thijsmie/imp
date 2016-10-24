@@ -1,6 +1,14 @@
-from responses import fail, success
-from application import db, app
+import pluginbase
+pluginsource = pluginbase.find_plugin_source()
 
+if (pluginsource == None):
+    print("This plugin cannot be executed directly")
+    import sys
+    sys.exit()
+
+app = pluginsource.appdata['app']
+security = pluginsource.appdata['security']
+protected = security.protected
 
 @app.route('/pos/{id}/add', methods=["POST"])
 def pos_add_stock(id):
